@@ -46,7 +46,8 @@ public class BoardService {
                 "totalElements", boardPage.getTotalElements(),
                 "totalPages", boardPage.getTotalPages(),
                 "rightPageNumber", rightPageNumber,
-                "leftPageNumber", leftPageNumber);
+                "leftPageNumber", leftPageNumber,
+                "currentPage", page);
 
         return result;
     }

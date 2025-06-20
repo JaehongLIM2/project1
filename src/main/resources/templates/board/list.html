@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .active {
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
 <h2>게시물 목록</h2>
@@ -29,7 +34,7 @@
         <a th:href="@{/board/list(page=${leftPageNumber - 10})}">이전</a>
     </span>
     <span th:each="pageNumber : ${#numbers.sequence(leftPageNumber, rightPageNumber)}">
-        <a th:href="@{/board/list(page = ${pageNumber})}" th:text="${pageNumber}"></a>
+        <a th:classappend="${(currentPage == pageNumber) ? 'active' : ''}" th:href="@{/board/list(page = ${pageNumber})}" th:text="${pageNumber}"></a>
         |
     </span>
     <span th:if="${(rightPageNumber + 1) <= totalPages}">
