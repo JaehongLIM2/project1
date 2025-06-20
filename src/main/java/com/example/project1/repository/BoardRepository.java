@@ -12,5 +12,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
   // 오버로드용 파라미터 없는 것
   List<BoardListInfo> findAllBy();
 
-  List<BoardListInfo> findAllBy(Pageable pageable);
+  Page<BoardListInfo> findAllBy(Pageable pageable);
 }
