@@ -1,6 +1,7 @@
 package com.example.project1.service;
 
 import com.example.project1.dto.BoardForm;
+import com.example.project1.dto.BoardListInfo;
 import com.example.project1.entity.Board;
 import com.example.project1.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,10 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public List<Board> list() {
-        List<Board> list = boardRepository.findAll();
-        return list;
+    public List<BoardListInfo> list() {
+//        List<Board> list = boardRepository.findAll();
+
+        List<BoardListInfo> boardList = boardRepository.findAllBy();
+        return boardList;
     }
 }
