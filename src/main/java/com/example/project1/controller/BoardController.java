@@ -41,4 +41,17 @@ public class BoardController {
         model.addAllAttributes(result);
         return "board/list";
     }
+
+    @GetMapping("view")
+    public String view(Integer id, Model model) {
+
+        // service에게 일 시키고
+        var dto = boardService.get(id);
+
+        // model 에 넣고
+        model.addAttribute("board", dto);
+
+        // view 로 forward
+        return "board/view";
+    }
 }
