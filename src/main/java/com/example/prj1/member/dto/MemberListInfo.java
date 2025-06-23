@@ -1,4 +1,4 @@
-package com.example.project1.member.dto;
+package com.example.prj1.member.dto;
 
 public interface MemberListInfo {
     String getId();

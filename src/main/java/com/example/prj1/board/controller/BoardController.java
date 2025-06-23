@@ -1,7 +1,7 @@
-package com.example.project1.board.controller;
+package com.example.prj1.board.controller;
 
-import com.example.project1.board.dto.BoardForm;
-import com.example.project1.board.service.BoardService;
+import com.example.prj1.board.dto.BoardForm;
+import com.example.prj1.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,10 +1,10 @@
-package com.example.project1.board.service;
+package com.example.prj1.board.service;
 
-import com.example.project1.board.dto.BoardDto;
-import com.example.project1.board.dto.BoardForm;
-import com.example.project1.board.dto.BoardListInfo;
-import com.example.project1.board.entity.Board;
-import com.example.project1.board.repository.BoardRepository;
+import com.example.prj1.board.dto.BoardDto;
+import com.example.prj1.board.dto.BoardForm;
+import com.example.prj1.board.dto.BoardListInfo;
+import com.example.prj1.board.entity.Board;
+import com.example.prj1.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
