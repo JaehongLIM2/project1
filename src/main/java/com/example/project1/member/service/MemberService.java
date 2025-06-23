@@ -1,6 +1,8 @@
 package com.example.project1.member.service;
 
+import com.example.project1.member.dto.MemberDto;
 import com.example.project1.member.dto.MemberForm;
+import com.example.project1.member.dto.MemberListInfo;
 import com.example.project1.member.entity.Member;
 import com.example.project1.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +42,21 @@ public class MemberService {
         } else {
             throw new DuplicateKeyException(data.getId() + " 는 이미 있는 아이디입니다.");
         }
+    }
+
+    public List<MemberListInfo> list() {
+        return memberRepository.findAllBy();
+    }
+
+    public MemberDto get(String id) {
+        Member member = memberRepository.findById(id).get();
+
+        MemberDto dto = new MemberDto();
+        dto.setId(member.getId());
+        dto.setNickName(member.getNickname());
+        dto.setInfo(member.getInfo());
+        dto.setCreatedAt(member.getCreatedAt());
+        return dto;
+
     }
 }
