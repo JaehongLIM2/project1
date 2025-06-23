@@ -1,13 +1,13 @@
-package com.example.project1.dto;
+package com.example.project1.board.dto;
 
+import com.example.project1.board.entity.Board;
 import lombok.Data;
-import lombok.Value;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * DTO for {@link com.example.project1.entity.Board}
+ * DTO for {@link Board}
  */
 //@Value
 @Data
