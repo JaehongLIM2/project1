@@ -21,7 +21,7 @@
             <div class="mb-3"><label for="textareaInfo" class="form-label">자기소개</label>
                 <textarea th:text="${member.info}" id="textareaInfo" type="text" class="form-control" readonly></textarea>
             </div>
-            <div class="mb-3"><label for="inputCreated" class="form-label"></label>
+            <div class="mb-3"><label for="inputCreated" class="form-label">가입일자</label>
                 <input th:value="${member.createdAt}" id="inputCreated" type="text" class="form-control" readonly>
             </div>
         </div>
