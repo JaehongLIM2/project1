@@ -1,4 +1,5 @@
 CREATE DATABASE prj1;
+
 USE prj1;
 
 CREATE TABLE board
