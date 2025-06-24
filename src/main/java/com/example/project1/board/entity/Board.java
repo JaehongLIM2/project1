@@ -1,5 +1,6 @@
 package com.example.project1.board.entity;
 
+import com.example.project1.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,11 @@ public class Board {
 
     private String title;
     private String content;
-    private String writer;
+
+    @ManyToOne
+    @JoinColumn(name = "writer")
+    private Member writer;
+
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
