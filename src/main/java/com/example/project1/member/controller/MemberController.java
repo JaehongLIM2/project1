@@ -66,14 +66,18 @@ public class MemberController {
             }
         }
         rttr.addFlashAttribute("alert",
-                        Map.of("code", "warning", "message", "권한이 없습니다."));
+                Map.of("code", "warning", "message", "권한이 없습니다."));
 
         return "redirect:/board/list";
     }
 
     @PostMapping("remove")
-    public String remove(MemberForm data, RedirectAttributes rttr) {
-        boolean result = memberService.remove(data);
+    public String remove(MemberForm data,
+                         RedirectAttributes rttr,
+                         @SessionAttribute(value = "loggedInUser", required = false)
+                         MemberDto user) {
+        // TODO : 작성한 글이 있으면 탈퇴 안됨
+        boolean result = memberService.remove(data, user);
 
         if (result) {
             rttr.addFlashAttribute("alert",
@@ -89,15 +93,30 @@ public class MemberController {
     }
 
     @GetMapping("edit")
-    public String edit(String id, Model model) {
-        model.addAttribute("member", memberService.get(id));
-        return "member/edit";
+    public String edit(String id,
+                       Model model,
+                       @SessionAttribute(value = "loggedInUser", required = false)
+                       MemberDto user,
+                       RedirectAttributes rttr) {
+        MemberDto member = memberService.get(id);
+        if (user != null) {
+            if (member.getId().equals(user.getId())) {
+                model.addAttribute("member", member);
+                return "member/edit";
+            }
+        }
+        rttr.addFlashAttribute("alert",
+                Map.of("code", "warning", "message", "권한이 없습니다."));
+        return "redirect:/board/list";
     }
 
     @PostMapping("edit")
-    public String edit(MemberForm data, RedirectAttributes rttr) {
-
-        boolean result = memberService.update(data);
+    public String edit(MemberForm data,
+                       RedirectAttributes rttr,
+                       @SessionAttribute(value = "loggedInUser", required = false)
+                       MemberDto user,
+                       HttpSession session) {
+        boolean result = memberService.update(data, user, session);
 
         if (result) {
 
@@ -119,21 +138,24 @@ public class MemberController {
     public String changePassword(String id,
                                  String oldPassword,
                                  String newPassword,
-                                 RedirectAttributes rttr) {
+                                 RedirectAttributes rttr,
+                                 @SessionAttribute(value = "loggedInUser", required = false)
+                                 MemberDto user) {
 
-        boolean result = memberService.updatePassword(id, oldPassword, newPassword);
+        if (user != null && user.getId().equals(id)) {
 
-        if (result) {
-            rttr.addFlashAttribute("alert",
-                    Map.of("code", "success", "message", "암호가 변경되었습니다."));
-        } else {
-            rttr.addFlashAttribute("alert",
-                    Map.of("code", "warning", "message", "암호가 일치하지 않습니다.."));
+            boolean result = memberService.updatePassword(id, oldPassword, newPassword);
+
+            if (result) {
+                rttr.addFlashAttribute("alert",
+                        Map.of("code", "success", "message", "암호가 변경되었습니다."));
+            } else {
+                rttr.addFlashAttribute("alert",
+                        Map.of("code", "warning", "message", "암호가 일치하지 않습니다.."));
+            }
         }
-
         rttr.addAttribute("id", id);
         return "redirect:/member/edit";
-
     }
 
     @GetMapping("login")
