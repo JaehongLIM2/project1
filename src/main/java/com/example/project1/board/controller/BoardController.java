@@ -2,6 +2,7 @@ package com.example.project1.board.controller;
 
 import com.example.project1.board.dto.BoardForm;
 import com.example.project1.board.service.BoardService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,18 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("write")
-    public String write() {
+    public String writeForm(RedirectAttributes rttr, HttpSession session) {
 
+        Object user = session.getAttribute("loggedInUser");
+
+        if (user != null) {
         return "board/write";
+        }else {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "danger", "message", "로그인 후 글을 작성해주세요."));
+
+            return "redirect:/member/login";
+        }
     }
 
     @PostMapping("write")
