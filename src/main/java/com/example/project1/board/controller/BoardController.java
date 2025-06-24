@@ -82,12 +82,23 @@ public class BoardController {
     }
 
     @PostMapping("remove")
-    public String remove(Integer id, RedirectAttributes rttr) {
-        boardService.remove(id);
+    public String remove(Integer id,
+                         RedirectAttributes rttr,
+                         @SessionAttribute(value = "loggedInUser", required = false)
+                         MemberDto user) {
+        boolean result = boardService.remove(id, user);
+        if (result) {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "danger", "message", id + "번 게시물이 삭제 되었습니다."));
+            return "redirect:/board/list";
 
-        rttr.addFlashAttribute("alert",
-                Map.of("code", "danger", "message", id + "번 게시물이 삭제되었습니다."));
-        return "redirect:/board/list";
+        } else {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "danger", "message", id + "번 게시물이 삭제 되지 않았습니다."));
+            return "redirect:/board/view";
+        }
+
+
     }
 
     @GetMapping("edit")
