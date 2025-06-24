@@ -27,27 +27,44 @@
                     <li class="nav-item">
                         <a th:href="@{/board/list}"
                            class="nav-link"
-                           th:classappend="${current == 'list' ? 'active' : ''}">목록</a>
+                           th:classappend="${current == 'list' ? 'active' : ''}">목록
+                        </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.loggedInUser != null}">
                         <a th:href="@{/board/write}"
                            class="nav-link"
-                           th:classappend="${current == 'write' ? 'active' : ''}">작성</a>
+                           th:classappend="${current == 'write' ? 'active' : ''}">작성
+                        </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.loggedInUser == null}">
                         <a th:href="@{/member/signup}"
                            class="nav-link"
-                           th:classappend="${current == 'signup' ? 'active' : ''}">회원가입</a>
+                           th:classappend="${current == 'signup' ? 'active' : ''}">회원가입
+                        </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.loggedInUser != null}">
                         <a th:href="@{/member/list}"
                            class="nav-link"
-                           th:classappend="${current == 'memberList' ? 'active' : ''}">회원목록</a>
+                           th:classappend="${current == 'memberList' ? 'active' : ''}">회원목록
+                        </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.loggedInUser == null}">
                         <a th:href="@{/member/login}"
                            class="nav-link"
-                           th:classappend="${current == 'login' ? 'active' : ''}">로그인</a>
+                           th:classappend="${current == 'login' ? 'active' : ''}">로그인
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${session.loggedInUser != null}">
+                        <a th:href="@{/member/logout}"
+                           class="nav-link">로그아웃
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${session.loggedInUser != null}">
+                        <a th:href="@{/member/view(id=${session.loggedInUser.id})}"
+                           class="nav-link"
+                           th:classappend="${current == 'memberView' ? 'active' : ''}">
+                            <span th:text="${session.loggedInUser.nickName}">별명</span>
+                        </a>
                     </li>
                 </ul>
             </div>
