@@ -2,14 +2,12 @@ package com.example.project1.board.controller;
 
 import com.example.project1.board.dto.BoardForm;
 import com.example.project1.board.service.BoardService;
+import com.example.project1.member.dto.MemberDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -27,8 +25,8 @@ public class BoardController {
         Object user = session.getAttribute("loggedInUser");
 
         if (user != null) {
-        return "board/write";
-        }else {
+            return "board/write";
+        } else {
             rttr.addFlashAttribute("alert",
                     Map.of("code", "danger", "message", "로그인 후 글을 작성해주세요."));
 
@@ -37,11 +35,24 @@ public class BoardController {
     }
 
     @PostMapping("write")
-    public String writePost(BoardForm data, RedirectAttributes rttr) {
-        boardService.add(data);
-        rttr.addFlashAttribute("alert",
-                Map.of("code", "primary", "message", "새 게시물이 등록되었습니다"));
-        return "redirect:/board/list";
+    public String writePost(BoardForm data,
+                            @SessionAttribute(name = "loggedInUser", required = false)
+                            MemberDto user,
+                            RedirectAttributes rttr) {
+
+
+        if (user != null) {
+            boardService.add(data, user);
+
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "primary", "message", "새 게시물이 등록되었습니다."));
+
+            return "redirect:/board/list";
+        } else {
+
+            return "redirect:/member/login";
+        }
+
     }
 
     @GetMapping("list")
