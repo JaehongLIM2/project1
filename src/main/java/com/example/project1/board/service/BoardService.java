@@ -91,14 +91,21 @@ public class BoardService {
         return false;
     }
 
-    public void update(BoardForm data) {
-        // 조회
-        Board board = boardRepository.findById(data.getId()).get();
-        // 수정
-        board.setTitle(data.getTitle());
-        board.setContent(data.getContent());
+    public boolean update(BoardForm data, MemberDto user) {
+        if (user != null) {
+            // 조회
+            Board board = boardRepository.findById(data.getId()).get();
+            if (board.getWriter().getId().equals(user.getId())) {
 
-        // 저장
-        boardRepository.save(board);
+                // 수정
+                board.setTitle(data.getTitle());
+                board.setContent(data.getContent());
+
+                // 저장
+                boardRepository.save(board);
+                return true;
+            }
+        }
+        return false;
     }
 }

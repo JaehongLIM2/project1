@@ -109,13 +109,23 @@ public class BoardController {
     }
 
     @PostMapping("edit")
-    public String editPost(BoardForm data, RedirectAttributes rttr) {
-        boardService.update(data);
-        rttr.addFlashAttribute("alert",
-                Map.of("code", "success", "message", data.getId() + "번 게시물이 수정되었습니다"));
+    public String editPost(BoardForm data,
+                           RedirectAttributes rttr,
+                           @SessionAttribute(value = "loggedInUser", required = false)
+                           MemberDto user) {
+        boolean result = boardService.update(data, user);
+
+        if (result) {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "success", "message", data.getId() + "번 게시물이 수정되었습니다"));
+        } else {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "success", "message", data.getId() + "번 게시물이 수정되지 않았습니다"));
+        }
+
 
         rttr.addAttribute("id", data.getId());
-        return "redirect:/board/list";
+        return "redirect:/board/view";
     }
 
 }
