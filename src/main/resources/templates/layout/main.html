@@ -8,10 +8,13 @@
           rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
 
-<div th:fragment="pageNavbar(current)" >
+<div th:fragment="pageNavbar(current)">
 
     <nav class="navbar navbar-expand-lg mb-5">
         <div class="container">
@@ -66,6 +69,7 @@
                         <a th:href="@{/member/view(id=${session.loggedInUser.id})}"
                            class="nav-link"
                            th:classappend="${current == 'memberView' ? 'active' : ''}">
+                            <i class="fa-solid fa-user"></i>
                             <span th:text="${session.loggedInUser.nickName}">별명</span>
                         </a>
                     </li>
@@ -74,10 +78,10 @@
                 <form th:action="@{/board/list}" method="get" class="d-flex order-lg-2">
                     <input type="text" class="form-control me-2"
                            name="keyword"
-                    th:value="${(param.keyword == null || param.keyword[0].isBlank()) ? '' :param.keyword[0]}">
+                           th:value="${(param.keyword == null || param.keyword[0].isBlank()) ? '' :param.keyword[0]}">
                     <button class="btn btn-outline-success">
                         <span style="word-break: keep-all">
-                            검색
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
                     </button>
                 </form>
