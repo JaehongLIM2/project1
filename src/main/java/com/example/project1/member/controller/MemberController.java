@@ -76,7 +76,7 @@ public class MemberController {
                          RedirectAttributes rttr,
                          @SessionAttribute(value = "loggedInUser", required = false)
                          MemberDto user) {
-        // TODO : 작성한 글이 있으면 탈퇴 안됨
+        // TODO : 탈퇴 후 로그아웃 안됨
         boolean result = memberService.remove(data, user);
 
         if (result) {
