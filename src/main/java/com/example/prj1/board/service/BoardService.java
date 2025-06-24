@@ -1,10 +1,10 @@
-package com.example.project1.service;
+package com.example.prj1.board.service;
 
-import com.example.project1.dto.BoardDto;
-import com.example.project1.dto.BoardForm;
-import com.example.project1.dto.BoardListInfo;
-import com.example.project1.entity.Board;
-import com.example.project1.repository.BoardRepository;
+import com.example.prj1.board.dto.BoardDto;
+import com.example.prj1.board.dto.BoardForm;
+import com.example.prj1.board.dto.BoardListInfo;
+import com.example.prj1.board.entity.Board;
+import com.example.prj1.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -64,5 +64,23 @@ public class BoardService {
 
         return dto;
 
+    }
+
+    public void remove(Integer id) {
+        boardRepository.deleteById(id);
+
+    }
+
+    public void update(BoardForm data) {
+        // 조회
+        Board board = boardRepository.findById(data.getId()).get();
+
+        // 수정
+        board.setTitle(data.getTitle());
+        board.setContent(data.getContent());
+        board.setWriter(data.getWriter());
+
+        // 저장
+        boardRepository.save(board);
     }
 }
