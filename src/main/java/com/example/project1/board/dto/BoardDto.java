@@ -1,6 +1,6 @@
-package com.example.prj1.board.dto;
+package com.example.project1.board.dto;
 
-import com.example.prj1.board.entity.Board;
+import com.example.project1.board.entity.Board;
 import lombok.Data;
 
 import java.io.Serializable;

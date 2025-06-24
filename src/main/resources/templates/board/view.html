@@ -5,49 +5,54 @@
     <title>Title</title>
 </head>
 <body>
-<nav th:replace="~{layout/main::pageNavbar(current='view')}"></nav>
+<nav th:replace="~{layout/main::pageNavbar(_)}"></nav>
+
+<!--.container>.row.justify-content-center>.col.col-lg-6-->
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col col-lg-6">
+        <div class="col col-lg-6">K
 
-
-            <h2>
+            <h2 class="mb-3">
                 <span th:text="${board.id}"></span>
                 번
-                게시물 보기
+                게시물
             </h2>
             <div class="mb-3">
-                <label class="form-lable" for="inputTitle">제목</label>
-                <input class="form-control" type="text" id="inputTitle"
-                       th:value="${board.title}" readonly>
+                <label class="form-label" for="inputTitle">제목</label>
+                <input class="form-control" type="text" id="inputTitle" th:value="${board.title}" readonly>
             </div>
             <div class="mb-3">
-                <label class="form-lable" for="textAreaContent">본문</label>
+                <label class="form-label" for="textareaContent">본문</label>
                 <textarea class="form-control" type="text"
-                          id="textAreaContent" rows="10"
+                          id="textareaContent"
+                          rows="10"
                           th:text="${board.content}"
                           readonly></textarea>
             </div>
             <div class="mb-3">
-                <label class="form-lable" for="inputWriter">작성자</label>
-                <input class="form-control" type="text" id="inputWriter"
-                       th:value="${board.writer}" readonly>
+                <label class="form-label" for="inputWriter">작성자</label>
+                <input class="form-control" type="text" id="inputWriter" th:value="${board.writer}" readonly>
             </div>
             <div class="mb-3">
-                <label class="form-lable" for="inputCreated">작성일시</label>
-                <input class="form-control" type="text" id="inputCreated"
-                       th:value="${board.createdAt}" readonly>
+                <label class="form-label" for="inputCreated">작성일시</label>
+                <input class="form-control" type="datetime-local" id="inputCreated" th:value="${board.createdAt}"
+                       readonly>
             </div>
+
             <div>
                 <button class="btn btn-outline-danger"
                         data-bs-toggle="modal"
-                        data-bs-target="#removeModal">삭제</button>
+                        data-bs-target="#removeModal">삭제
+                </button>
                 <a th:href="@{/board/edit(id=${board.id})}"
-                   class="btn btn-outline-secondary">수정</a>
+                   class="btn btn-outline-secondary">수정
+                </a>
             </div>
+
         </div>
     </div>
 </div>
+
 <div class="d-none">
     <form id="removeForm" th:action="@{/board/remove}" method="post">
         <input type="text" name="id" th:value="${board.id}">
@@ -59,21 +64,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">삭제 확인</h1>
+                <h1 class="modal-title fs-5">
+                    삭제 확인
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 삭제 하시겠습니까?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="submit" form="removeForm" class="btn btn-danger">삭제</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    취소
+                </button>
+                <button type="submit" form="removeForm" class="btn btn-danger">
+                    삭제
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<th:block th:replace="~{layout/main::commonScript}"></th:block>
+<th:block th:replace="~{layout/main::commonScript}"/>
 
 </body>
 </html>

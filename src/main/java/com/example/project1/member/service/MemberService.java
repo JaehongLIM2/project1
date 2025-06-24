@@ -1,10 +1,10 @@
-package com.example.prj1.member.service;
+package com.example.project1.member.service;
 
-import com.example.prj1.member.dto.MemberDto;
-import com.example.prj1.member.dto.MemberForm;
-import com.example.prj1.member.dto.MemberListInfo;
-import com.example.prj1.member.entity.Member;
-import com.example.prj1.member.repository.MemberRepository;
+import com.example.project1.member.dto.MemberDto;
+import com.example.project1.member.dto.MemberForm;
+import com.example.project1.member.dto.MemberListInfo;
+import com.example.project1.member.entity.Member;
+import com.example.project1.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
