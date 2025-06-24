@@ -59,10 +59,11 @@ public class BoardController {
     public String list(
             @RequestParam(defaultValue = "1")
             Integer page,
-            Model model) {
+            Model model,
+            @RequestParam(defaultValue = "")
+            String keyword) {
 
-        // TODO : 검색할 수 있는 기능
-        var result = boardService.list(page);
+        var result = boardService.list(page, keyword);
 
 //        model.addAttribute("boardList", result);
         model.addAllAttributes(result);
