@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('로그인')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="~{layout/main::pageNavbar('login')}"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <h2 class="mb-3">로그인</h2>
+
+            <form th:action="@{/member/login}" method="post">
+                <div>
+                    <div class="mb-3">
+                        <label for="inputId" class="form-label">아이디</label>
+                        <input id="inputId" name="id" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">암호</label>
+                        <input id="inputPassword" name="password" type="password" class="form-control">
+                    </div>
+                    <bic class="mb-3">
+                        <button class="btn btn-primary">로그인</button>
+                    </bic>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+
+</body>
+</html>
